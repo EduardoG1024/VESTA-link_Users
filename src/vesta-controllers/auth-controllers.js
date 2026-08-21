@@ -1,19 +1,28 @@
 import express from 'express';
+import { CreateUser } from '../entity/create-user.js';
 
 export class AuthControllers {
 
-    static SignUpUser = (req, res) => {
+    static SignUpUser = async (req, res) => {
         try {
             const {usertag, password, confirmPassword} = req.body;
 
+            // CREATE USER
+            const USER = new CreateUser(usertag, password, confirmPassword);
+            USER.validation();
+            await USER.generateHash();
+
+            // INSERT IN DB
+
             return res.status(200).json({
                 message: 'Usuario Registrado!',
-                usertag: usertag,
+                usertag: USER,
                 created_at: new Date()
             });
         } catch (error) {
             return res.status(400).json({
-                message: 'Algo salió mal al registrarte'
+                message: 'Algo salió mal al registrarte',
+                error: error.message
             });
         }
     }
