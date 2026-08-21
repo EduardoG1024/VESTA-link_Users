@@ -1,5 +1,6 @@
 import express from 'express';
 import { CreateUser } from '../entity/create-user.js';
+import { AuthRepository } from '../repository/auth-repository.js';
 
 export class AuthControllers {
 
@@ -13,11 +14,12 @@ export class AuthControllers {
             await USER.generateHash();
 
             // INSERT IN DB
+            const CONFIRM = new AuthRepository(USER.usertag, USER.hash, USER.status);
+            const DB = await CONFIRM.userInsert();
 
             return res.status(200).json({
                 message: 'Usuario Registrado!',
-                usertag: USER,
-                created_at: new Date()
+                usertag: DB.rows,
             });
         } catch (error) {
             return res.status(400).json({

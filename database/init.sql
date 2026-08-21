@@ -8,7 +8,7 @@ CREATE TABLE users(
 
 CREATE TABLE links(
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) NOT NULL ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     link VARCHAR(2048),
     category_1 VARCHAR(20),
     category_2 VARCHAR(20),
