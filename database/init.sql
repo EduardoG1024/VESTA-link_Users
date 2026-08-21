@@ -1,0 +1,17 @@
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    usertag VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    status BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE links(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) NOT NULL ON DELETE CASCADE,
+    link VARCHAR(2048),
+    category_1 VARCHAR(20),
+    category_2 VARCHAR(20),
+    category_3 VARCHAR(20),
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
+)
