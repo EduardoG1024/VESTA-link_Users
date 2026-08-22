@@ -24,7 +24,7 @@ import auth from './vesta-routers/auth-routers.js';
         cookie: {
             httpOnly: true,
             secure: false,
-            maxAge: 600000,
+            maxAge: 60 * 60 * 1000,
         }
     }));
     app.use('/auth', auth);
