@@ -1,5 +1,5 @@
-import { HashPassword } from "../config/bcrypt.js";
-import { AuthRepository } from "../repository/auth-repository.js";
+import { HashPassword } from "../../config/bcrypt.js";
+import { AuthRepository } from "../../repository/auth-repository.js";
 
 export class SignUpUserEntity {
 

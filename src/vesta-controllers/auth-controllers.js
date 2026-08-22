@@ -1,7 +1,5 @@
 import express from 'express';
-import { SignUpUserEntity } from '../entity/signup-entity.js';
-import { AuthRepository } from '../repository/auth-repository.js';
-import { SignInUserEntity } from '../entity/signIn-entity.js';
+import { SignUpUserEntity, SignInUserEntity } from '../entity/auth-entity/index.js';
 
 export class AuthControllers {
 
@@ -20,7 +18,7 @@ export class AuthControllers {
                 message: 'Usuario Registrado!',
                 usertag: DB.rows,
             });
-            
+
         } catch (error) {
             return res.status(400).json({
                 message: 'Algo salió mal al registrarte',

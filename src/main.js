@@ -17,6 +17,16 @@ import auth from './vesta-routers/auth-routers.js';
     }));
     app.use(express.json());
     app.use(express.urlencoded({extended: true}));
+    app.use(session({
+        secret: envs.SECRET_SESSION,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            secure: false,
+            maxAge: 600000,
+        }
+    }));
     app.use('/auth', auth);
 
 

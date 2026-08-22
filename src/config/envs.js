@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 export const envs = {
     PORT: process.env.PORT,
+    SECRET_SESSION: process.env.SECRET_SESSION,
     DB_HOST: process.env.DB_HOST,
     DB_PORT: process.env.DB_PORT,
     DB_USER: process.env.DB_USER,

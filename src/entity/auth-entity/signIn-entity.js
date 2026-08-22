@@ -1,5 +1,5 @@
-import { AuthRepository } from "../repository/auth-repository.js";
-import { CompareHash } from "../config/bcrypt.js";
+import { AuthRepository } from "../../repository/auth-repository.js";
+import { CompareHash } from "../../config/bcrypt.js";
 
 export class SignInUserEntity {
 
