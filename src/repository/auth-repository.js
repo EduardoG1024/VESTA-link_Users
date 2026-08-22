@@ -17,7 +17,7 @@ export class AuthRepository {
 
     static async GetHashUserDB(usertag) {
         try {
-            const query = `SELECT password FROM users WHERE usertag = $1`;
+            const query = `SELECT id, password FROM users WHERE usertag = $1`;
             const values = [usertag];
             const result = await pool.query(query, values);
             
@@ -26,5 +26,4 @@ export class AuthRepository {
             throw new Error('Error al obtener hash de la DB');
         }
     }
-
 }

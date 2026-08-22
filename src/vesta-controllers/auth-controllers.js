@@ -37,9 +37,11 @@ export class AuthControllers {
             USER.DataValidation();
             await USER.GetUserHash();
             await USER.ComparePasswordHash();
+            USER.CreateUserSession(req);
 
             return res.status(200).json({
                 message: 'Usuario Autenticado!',
+                token: req.session.user
             });
 
         } catch (error) {
