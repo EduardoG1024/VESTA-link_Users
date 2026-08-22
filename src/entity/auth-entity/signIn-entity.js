@@ -20,10 +20,12 @@ export class SignInUserEntity {
     async GetUserHash() {
         try {
             const HASH = await AuthRepository.GetHashUserDB(this.usertag);
+            if (HASH.rowCount === 0)
+                throw new Error('Usuario no existente');
             this.id = HASH.rows[0].id;
             this.hash = HASH.rows[0].password;
         } catch (error) {
-            throw new Error('Error en GetUserHash');
+            throw new Error(error.message);
         }
     }
 

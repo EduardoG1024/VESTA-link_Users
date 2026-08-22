@@ -3,8 +3,9 @@ import { AuthRepository } from "../../repository/auth-repository.js";
 
 export class SignUpUserEntity {
 
-    constructor(usertag, password, confirmPassword) {
+    constructor(usertag, email, password, confirmPassword) {
         this.usertag = usertag;
+        this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.hash = null;
@@ -12,15 +13,17 @@ export class SignUpUserEntity {
 
     DataValidation() {
         if (!this.usertag)
-            throw new Error('Usertag is not included');
+            throw new Error('Usertag no esta incluido');
+        if (!this.email)
+            this.email = null;
         if (!this.password)
-            throw new Error('Password is not included');
+            throw new Error('Password no esta incluido');
         if (!this.confirmPassword)
-            throw new Error('ConfirmPassword is not included');
-        if (this.usertag.length < 8 || this.usertag.length > 50)
-            throw new Error('Password must have more than 8 digits and less than 50 digits');
+            throw new Error('ConfirmPassword no esta incluido');
+        if (this.password.length < 8 || this.password.length > 50)
+            throw new Error('Password debe tener 8 digitos y menos de 50 digitos');
         if (this.confirmPassword != this.password)
-            throw new Error('Both passwords must be the same to confirm it');
+            throw new Error('Ambas contraseñas deben ser iguales para continuar');
     }
 
     async GenerateHash() {
@@ -34,7 +37,7 @@ export class SignUpUserEntity {
 
     async CreateNewUser() {
         try {
-            const DB = await AuthRepository.CreateNewUserDB(this.usertag, this.hash);
+            const DB = await AuthRepository.CreateNewUserDB(this.usertag, this.email, this.hash);
             return DB;
         } catch (error) {
             throw new Error('Error al guardar usuario en la DB');

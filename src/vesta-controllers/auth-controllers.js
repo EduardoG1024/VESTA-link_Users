@@ -5,10 +5,10 @@ export class AuthControllers {
 
     static SignUpUser = async (req, res) => {
         try {
-            const {usertag, password, confirmPassword} = req.body;
+            const {usertag, email, password, confirmPassword} = req.body;
 
             // CREAR USUARIO -> VALIDAR -> GENERAR HASH -> GUARDAR EN DB -> RESPONDER
-            const USER = new SignUpUserEntity(usertag, password, confirmPassword);
+            const USER = new SignUpUserEntity(usertag, email, password, confirmPassword);
 
             USER.DataValidation();
             await USER.GenerateHash();
