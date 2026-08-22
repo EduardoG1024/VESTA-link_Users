@@ -2,13 +2,7 @@ import { pool } from "../config/database.js";
 
 export class AuthRepository {
 
-    constructor(usertag, password, status) {
-        this.usertag = usertag;
-        this.password = password;
-        this.status = status;
-    }
-
-    async userInsert() {
+    static async CreateNewUserDB() {
         try {
             const query = `INSERT INTO users(usertag, password, status) 
                            VALUES ($1, $2, $3) RETURNING *`;
@@ -20,13 +14,15 @@ export class AuthRepository {
         }
     }
 
-    static async getUsers() {
+    static async GetHashUserDB(usertag) {
         try {
-            const query = `SELECT * FROM users`;
-            const result = await pool.query(query);
+            const query = `SELECT password FROM users WHERE usertag = $1`;
+            const values = [usertag];
+            const result = await pool.query(query, values);
+            
             return result;
         } catch (error) {
-            throw new Error('Error al obtener los usurios de la DB');
+            throw new Error('Error al obtener hash de la DB');
         }
     }
 
