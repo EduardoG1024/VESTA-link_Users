@@ -26,6 +26,7 @@ export class SignInUserEntity {
     }
 
     async ComparePasswordHash() {
-        return await CompareHash(this.password, this.hash);
+        if (!await CompareHash(this.password, this.hash))
+            throw new Error('Contraseña incorrecta');
     }
 }
