@@ -1,4 +1,3 @@
-import express from 'express';
 import { AuthRepository } from "../../repository/auth-repository.js";
 import { CompareHash } from "../../config/bcrypt.js";
 
@@ -33,11 +32,7 @@ export class SignInUserEntity {
             throw new Error('Contraseña incorrecta');
     }
 
-    async GetUserProfileForSession() {
-
-    }
-
-    CreateUserSession = (req) => {
+    CreateUserSession(req) {
         req.session.user = {
             id: this.id,
             usertag:this.usertag

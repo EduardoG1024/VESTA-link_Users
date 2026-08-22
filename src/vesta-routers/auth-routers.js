@@ -3,8 +3,8 @@ import { AuthControllers } from '../vesta-controllers/auth-controllers.js';
 
 const auth = Router();
 
-auth.post('/signup', AuthControllers.SignUpUser);
-auth.post('/signin', AuthControllers.SignInUser);
-auth.get('/signout', AuthControllers.SignOutUser);
+auth.post('/signUp', AuthControllers.SignUpUser);
+auth.post('/signIn', AuthControllers.SignInUser);
+auth.get('/signOut', AuthControllers.SignOutUser);
 
 export default auth;

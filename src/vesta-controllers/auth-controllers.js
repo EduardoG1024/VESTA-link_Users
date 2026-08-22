@@ -1,5 +1,5 @@
 import express from 'express';
-import { SignUpUserEntity, SignInUserEntity } from '../entity/auth-entity/index.js';
+import { SignUpUserEntity, SignInUserEntity, SignOutUserEntity } from '../entity/auth-entity/index.js';
 
 export class AuthControllers {
 
@@ -54,16 +54,15 @@ export class AuthControllers {
 
     static SignOutUser = (req, res) => {
         try {
-            const {usertag, password, confirmPassword} = req.body;
+            SignOutUserEntity.DestroyUserSession(req, res);
 
             return res.status(200).json({
-                message: 'Usuario Registrado!',
-                usertag: usertag,
-                created_at: new Date()
+                message: 'Session Terminada',
             });
         } catch (error) {
             return res.status(400).json({
-                message: 'Algo salió mal al registrarte'
+                message: 'Algo salió mal al terminar la session',
+                error: error.message
             });
         }
     }
