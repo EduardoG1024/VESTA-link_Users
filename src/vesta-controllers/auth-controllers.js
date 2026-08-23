@@ -31,7 +31,8 @@ export class AuthControllers {
         try {
             const {usertag, password} = req.body;
 
-            // CREAR SIGNIN -> VALIDAR -> OBTENER HASH -> CREAR SESION -> RESPONDER
+            // VALIDAR SI LA SESSION EXISTE -> CREAR SIGNIN -> 
+            // VALIDAR -> OBTENER HASH -> CREAR SESION -> RESPONDER
             const USER = new SignInUserEntity(usertag, password);
             
             USER.DataValidation();
@@ -41,7 +42,7 @@ export class AuthControllers {
 
             return res.status(200).json({
                 message: 'Usuario Autenticado!',
-                token: req.session.user
+                session: req.session.user
             });
 
         } catch (error) {
@@ -54,6 +55,7 @@ export class AuthControllers {
 
     static SignOutUser = (req, res) => {
         try {
+            SignOutUserEntity.ValidateSessionExist(req);
             SignOutUserEntity.DestroyUserSession(req, res);
 
             return res.status(200).json({
