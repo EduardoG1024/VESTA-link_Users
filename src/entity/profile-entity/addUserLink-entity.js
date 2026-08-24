@@ -33,7 +33,7 @@ export class AddUserLinkEntity {
         }
     }
 
-    CreateYoutubeEmbed() {
+    CreateEmbed() {
         try {
             const link = new URL(this.url);
             const { origin, searchParams, pathname} = link;

@@ -22,13 +22,13 @@ export class ProfileControllers {
             if (!req.session.user) {
                 throw new Error('USUARIO NO AUTENTICADO');
             }
-            const {id, usertag} = req.session.user;
+            const {id} = req.session.user;
             const {url, category_1, category_2, category_3, isMusic} = req.body;
 
             const LINK = new AddUserLinkEntity(id, url, category_1, category_2, category_3, isMusic);
             LINK.DataValidation();
-            const embeded = LINK.ValidateURL();
-            LINK.CreateYoutubeEmbed();
+            LINK.ValidateURL();
+            LINK.CreateEmbed();
 
             return res.status(200).json({
                 message: 'Link guardado!',
