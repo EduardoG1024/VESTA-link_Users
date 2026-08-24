@@ -13,7 +13,7 @@
 - **Register:** in this page the user will create a usertag(username) and create a password and then confirm the password.
 - if the user forgets their password, they will need to submit a report to: ```https://vestalink.vercel.app/reports```.
 - **Profile:** in this page the user will be able to add new URL's, display videos, images and posts.
-- **Config:** in this page the user will see 
+- **Config:** in this page the user will see their information like usertag, URL's saved, aviable slots, categories, etc.
 
 ## DESIGN
 ![Design Image](./design/VESTAlink%20Design.png)
