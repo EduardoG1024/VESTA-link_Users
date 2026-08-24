@@ -2,11 +2,11 @@ import { pool } from "../config/database.js";
 
 export class AuthRepository {
 
-    static async CreateNewUserDB(usertag, email, password) {
+    static async CreateNewUserDB(usertag, password) {
         try {
-            const query = `INSERT INTO users(usertag, email, password) 
-                           VALUES ($1, $2, $3) RETURNING *`;
-            const values = [usertag, email, password];
+            const query = `INSERT INTO users(usertag, password) 
+                           VALUES ($1, $2) RETURNING *`;
+            const values = [usertag, password];
             const result = await pool.query(query, values);
 
             return result;

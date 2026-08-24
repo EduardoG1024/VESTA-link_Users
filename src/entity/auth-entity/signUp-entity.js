@@ -3,9 +3,8 @@ import { AuthRepository } from "../../repository/auth-repository.js";
 
 export class SignUpUserEntity {
 
-    constructor(usertag, email, password, confirmPassword) {
+    constructor(usertag, password, confirmPassword) {
         this.usertag = usertag;
-        this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.hash = null;
@@ -14,8 +13,6 @@ export class SignUpUserEntity {
     DataValidation() {
         if (!this.usertag)
             throw new Error('Usertag no esta incluido');
-        if (!this.email)
-            this.email = null;
         if (!this.password)
             throw new Error('Password no esta incluido');
         if (!this.confirmPassword)
@@ -37,7 +34,7 @@ export class SignUpUserEntity {
 
     async CreateNewUser() {
         try {
-            const DB = await AuthRepository.CreateNewUserDB(this.usertag, this.email, this.hash);
+            const DB = await AuthRepository.CreateNewUserDB(this.usertag, this.hash);
             return DB;
         } catch (error) {
             throw new Error('Error al guardar usuario en la DB');

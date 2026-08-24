@@ -5,18 +5,19 @@ export class AuthControllers {
 
     static SignUpUser = async (req, res) => {
         try {
-            const {usertag, email, password, confirmPassword} = req.body;
+            const {usertag, password, confirmPassword} = req.body;
 
             // CREAR USUARIO -> VALIDAR -> GENERAR HASH -> GUARDAR EN DB -> RESPONDER
-            const USER = new SignUpUserEntity(usertag, email, password, confirmPassword);
+            const USER = new SignUpUserEntity(usertag, password, confirmPassword);
 
             USER.DataValidation();
             await USER.GenerateHash();
             const DB = await USER.CreateNewUser();
 
             return res.status(200).json({
-                message: 'Usuario Registrado!',
-                usertag: DB.rows,
+                message: `Usuario ${DB.rows[0].usertag} Registrado!`,
+                user: 'En caso de olvidar tu contraseña envia tu reporte a:',
+                reports: 'https://vestalink.vercel.app/reports',
             });
 
         } catch (error) {
