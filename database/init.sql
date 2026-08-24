@@ -15,5 +15,6 @@ CREATE TABLE links(
     category_1 VARCHAR(20) NOT NULL,
     category_2 VARCHAR(20),
     category_3 VARCHAR(20),
+    isMusic BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 )

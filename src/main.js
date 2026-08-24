@@ -6,6 +6,7 @@ import 'dotenv/config';
 
 import { envs } from './config/envs.js';
 import auth from './vesta-routers/auth-routers.js';
+import profile from './vesta-routers/profile-routers.js';
 
 (() => {
     const app = express();
@@ -28,6 +29,7 @@ import auth from './vesta-routers/auth-routers.js';
         }
     }));
     app.use('/auth', auth);
+    app.use('/profile', profile);
 
 
     app.listen(envs.PORT, () => {

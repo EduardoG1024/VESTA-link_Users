@@ -2,7 +2,20 @@ import { pool } from "../config/database.js";
 
 export class ProfileRepository {
 
-    static async AddNewUserLink(id, url, embed, one, two, three) {
+    static async GetUserLinksDB(id) {
+        try {
+            const query = `SELECT url, embed, category_1, category_2, category_3 FROM links
+                           WHERE user_id = $1`;
+            const values = [id];
+            const result = await pool.query(query, values);
+
+            return result;
+        } catch (error) {
+            throw new Error('Error al consultar URLs en la DB');
+        }
+    }
+
+    static async AddNewUserLinkDB(id, url, embed, one, two, three) {
         try {
             const query = `INSERT INTO links (user_id, url, embed, category_1, category_2, category_3)
                            VALUES($1, $2, $3, $4, $5, $6)`;
@@ -15,7 +28,7 @@ export class ProfileRepository {
         }
     }
     
-    static async UpdateExistingUserLink(url, embed, one, two, three, id) {
+    static async UpdateExistingUserLinkDB(url, embed, one, two, three, id, old) {
         try {
             const query = `UPDATE links SET 
                            url = $1
@@ -23,8 +36,8 @@ export class ProfileRepository {
                            category_1 = $3
                            category_2 = $4
                            category_3 = $5
-                           WHERE user_id = $6`;
-            const values = [url, embed, one, two, three, id];
+                           WHERE user_id = $6 and url = $7`;
+            const values = [url, embed, one, two, three, id, old];
             const result = await pool.query(query, values);
 
             return result;
@@ -33,7 +46,7 @@ export class ProfileRepository {
         }
     }
 
-    static async DeleteUserSingleLink(id, url) {
+    static async DeleteUserSingleLinkDB(id, url) {
         try {
             const query = `DELETE FROM links
                            WHERE user_id = $1 AND url = $2`;
